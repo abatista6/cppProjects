@@ -1,0 +1,210 @@
+Script started on 2017-09-26 22:28:07-0400
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ cat nextday.h nextday.cpp
+/* Adrianna Batista
+ * 9/26/2017
+ * Assignment: Homework 3
+ * Problem 3
+ * File Name: nextday.h
+ * File Description: This is the header file for the Nextday class
+ */
+
+
+#ifndef NEXTDAY_H
+#define NEXTDAY_H
+
+#include <iostream>
+using namespace std;
+
+class Nextday
+{
+	public:
+		void input_data(); //read user input
+		string find_weekday(); //find the next day of the week and return it
+		int find_month(); //find the next month and return it
+		int find_day(); //find the next date and return it
+		int find_year(); //find the next year and return it
+		void output_data(); //write data and display to user
+
+	private:
+		string weekday; //variable for the days of the week
+		int month, day, year; //numerical variables for month, day, and year
+};
+#endif
+
+/* Adrianna Batista
+ * 9/26/2017
+ * Assignment: Homework 3
+ * Problem 3
+ * File Name: nextday.cpp
+ * File Description: This is the implementation file for the Nextday class. It defines the declarations and includes a driver at the end
+ */
+
+#include "nextday.h"
+
+void Nextday::input_data()
+{
+	cout << "Enter day of week, month, day, and year" << endl;
+	cin >> weekday;
+	cin >> month;
+	cin >> day;
+	cin >> year;
+}
+
+string Nextday::find_weekday()
+{
+	string next;
+
+	if (weekday == "Monday")
+		next = "Tuesday";
+
+	else if (weekday == "Tuesday")
+		next = "Wednesday";
+
+	else if (weekday == "Wednesday")
+		next = "Thursday";
+
+	else if (weekday == "Thursday")
+		next = "Friday";
+
+	else if (weekday == "Friday")
+		next = "Saturday";
+
+	else if (weekday == "Saturday")
+		next = "Sunday";
+
+	else if (weekday == "Sunday")
+		next = "Monday";
+
+	return (next);
+
+}
+
+int Nextday::find_month()
+{
+
+	if (day == 1)
+	{
+		if (month == 12)
+		{
+			month = 1;
+		}
+
+		else
+		{
+			month++;
+		}
+	}
+
+	return (month);
+}
+
+int Nextday::find_day()
+{
+	
+	switch(month)
+	{
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			if (day == 31)
+			{
+				day = 1;
+			}
+			
+			else
+			{
+				day++;
+			}
+		break;
+
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			if (day == 30)
+			{
+				day = 1;
+			}
+
+			else
+			{
+				day++;
+			}
+		break;
+
+		case 2:
+			if (day == 28)
+			{
+				day = 1;
+			}
+
+			else
+			{
+				day++;
+			}
+		break;
+	}
+	
+	return (day);
+
+}
+
+int Nextday::find_year()
+{
+	if (day == 1 && month == 1)
+	{
+		year++;
+	}
+
+	return (year);
+
+}
+
+void Nextday::output_data()
+{
+	int x, y, z;
+
+	x = find_day();
+	y = find_month();
+	z = find_year();
+
+	cout << "The next day is: " << endl;
+	cout << find_weekday() << " " << y << '/' << x << '/' << z << endl;
+
+}
+
+
+int main()
+{
+	Nextday x;
+
+	x.input_data();
+	x.output_data();
+
+
+}
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ g++ nextday.cpp
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ ./a.out
+Enter day of week, month, day, and year
+Tuesday
+9
+26
+2017
+The next day is: 
+Wednesday 9/27/2017
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ ./a.out
+Enter day of week, month, day, and year
+Sunday
+12
+31
+2017
+The next day is: 
+Monday 1/1/2018
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ exit
+exit
+
+Script done on 2017-09-26 22:29:18-0400

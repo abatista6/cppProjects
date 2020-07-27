@@ -1,0 +1,114 @@
+Script started on 2017-09-21 20:23:17-0400
+]0;abatista@storm:~[abatista@storm ~]$ cat largest_diff.h largest_diff.cpp
+/*Adrianna Batista
+ * Assignment: HW #2
+ * Problem 1: Write a c++ program that takes as input a list of n integers and produces
+ * as output the largest difference obtained by subtracting an integer in the list from
+ * the one following it.
+ * File Name: largest_diff.h
+ * File Description: This is the header file for the Largest_diff class
+ */
+
+#ifndef LARGEST_DIFF_H
+#define LARGEST_DIFF_H
+
+#include <iostream>
+using namespace std;
+
+class Largest_diff
+{
+	public:
+		void input_data(); //function that reads user input
+		int compute_largest(); //function that computes the largest difference
+		void output_data(); //function that writes program output
+
+	private:
+		static const int MAX = 100; //variable that sets array size to 100, since
+					    //user is inputting unknown number of integers
+		int integer_list[MAX]; //array that holds user input
+		static const int DELIM = -999; //delimeter to signal end of user input
+		static int count; //counter to keep track of total number of values in array
+
+};
+#endif
+
+/* Adrianna Batista
+ * Assignment: HW #2
+ * Problem 1: Write a c++ program that takes as input a list of n integers and produces
+ * as output the largest difference obtained by subtracting an integer in the list from
+ * the one following it.
+ * File Name: largest_diff.cpp
+ * File Description: The following code defines and implements the class
+ * data that was declared in the corresponding header file
+ */
+
+#include "largest_diff.h"
+
+int Largest_diff::count=0;
+
+void Largest_diff::input_data()
+{
+	int integer;
+
+	cout << "Enter a list of n integers. Enter -999 to stop input." << endl;
+	
+	for (int i=0; i < MAX; i++)
+	{
+		cin >> integer;
+
+		if(integer != DELIM)
+		{
+			integer_list[i] = integer;
+			count++;
+		}
+		else
+			break;
+	}
+}
+
+int Largest_diff::compute_largest()
+{
+	int max_diff = integer_list[1] - integer_list[0];
+	int temp;
+
+	for (int i=2; i < count; i++)
+	{
+		temp = integer_list[i+1] - integer_list[i];
+ 
+		if (temp > max_diff)
+			max_diff = temp;
+	}
+
+	return(max_diff);
+}
+
+void Largest_diff::output_data()
+{
+	cout << "The largest difference is: " << compute_largest() << endl;
+}
+
+int main()
+{
+	Largest_diff x;
+
+	x.input_data();
+	x.output_data();
+}
+
+]0;abatista@storm:~[abatista@storm ~]$ g++ largest_diff.cpp 
+]0;abatista@storm:~[abatista@storm ~]$ ./a.out
+Enter a list of n integers. Enter -999 to stop input.
+80
+24
+1
+335
+56
+33
+299
+0
+-999
+The largest difference is: 334
+]0;abatista@storm:~[abatista@storm ~]$ exit
+exit
+
+Script done on 2017-09-21 20:24:47-0400

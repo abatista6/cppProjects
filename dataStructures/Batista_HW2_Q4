@@ -1,0 +1,98 @@
+Script started on 2017-09-22 19:20:09-0400
+]0;abatista@storm:~[abatista@storm ~]$ cat palindrome.h palindrome.cpp
+/*Adrianna Batista
+ * Assignment: HW #2
+ * Problem 4: Write a c++ program that determines whether a string of n characters
+ * is a palindrome (a string that reads the same forward and backward).
+ * File Name: palindrome.h
+ * File Description: This is the header file that declares the data for the class Palindrome.
+ */
+
+#ifndef PALINDROME_H
+#define PALINDROME_H
+
+#include <iostream>
+using namespace std;
+
+class Palindrome {
+
+	public:
+		void input_data(); //function that reads user input
+		void output_data(); //function that writes program output
+		bool check_string(string &); //function that checks string palin to determine if palindrome
+		
+	private:
+		string palin; //string variable being inputted and checked
+};
+#endif
+
+/*Adrianna Batista
+ * Assignment: HW #2
+ * Problem 4: Write a c++ program that determines whether a string of n characters
+ * is a palindrome (a string that reads the same forward and backward).
+ * File Name: palindrome.cpp
+ * File Description: The following code defines and implements the class data that
+ * was declared in the corresponding header file.
+ */
+
+#include "palindrome.h"
+
+void Palindrome::input_data()
+{
+	cout << "Enter a string to check if it is a palindrome: ";
+	cin >> palin;
+}
+
+void Palindrome::output_data()
+{
+	if (check_string(palin))
+	{
+		cout << palin << " is a palindrome." << endl;
+	}
+
+	else
+	{
+		cout << palin << " is NOT a palindrome." << endl;
+	}
+}
+
+bool Palindrome::check_string(string &palin)
+{
+	int length, max;
+	bool check;
+
+	check = true;
+	length = palin.length();
+	max = length/2;
+
+	for(int i=0; i < max; i++)
+	{
+		if (tolower(palin.at(i)) != tolower(palin.at(length-i-1)))
+		{
+			check = false;
+			break;
+		}
+	}
+
+	return(check);
+}
+
+int main()
+{
+	Palindrome x;
+
+	x.input_data();
+	x.output_data();
+
+}
+]0;abatista@storm:~[abatista@storm ~]$ g++ palindrome.cpp
+]0;abatista@storm:~[abatista@storm ~]$ ./a.out
+Enter a string to check if it is a palindrome: toad
+toad is NOT a palindrome.
+]0;abatista@storm:~[abatista@storm ~]$ ./a.out
+Enter a string to check if it is a palindrome: racecar
+racecar is a palindrome.
+]0;abatista@storm:~[abatista@storm ~]$ exit
+exit
+
+Script done on 2017-09-22 19:20:39-0400

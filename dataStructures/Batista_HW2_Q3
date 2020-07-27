@@ -1,0 +1,108 @@
+Script started on 2017-09-22 19:11:56-0400
+]0;abatista@storm:~[abatista@storm ~]$ cat negative_int.h negative_int.cpp
+/*Adrianna Batista
+ * Assignment: HW #2
+ * Problem 3: Write a c++ program that takes a list of n integers
+ * as input and finds the total number of negative integers.
+ * File Name: negative_int.h
+ * File Description: This is the header file for the Negative_int
+ * Class as it declares all of the class data.
+ */
+
+#ifndef NEGATIVE_INT_H
+#define NEGATIVE_INT_H
+
+#include <iostream>
+using namespace std;
+
+class Negative_int
+{
+	public:
+		void input_data(); //function that reads user input
+		int find_negative(); //function that finds negative integers
+		void output_data(); //function that writes program output
+
+	private:
+		static const int MAX = 100; //set array size to 100 since user is inputting n number of integers
+		int integer_list[MAX]; //array that holds user inout
+		static const int DELIM = -999; //delimeter to signal end of user input
+		static int count_total, count_negative; //counter variables to keep track of total integers entered and total negative integers
+
+};
+#endif
+/*Adrianna Batista
+ * Assignment: HW #2
+ * Problem 3: Write a c++ program that takes a list of n integers
+ * as input and finds the total number of negative integers.
+ * File Name: negative_int.cpp
+ * File Description: The following code define and implements the Negative_int class data
+ * that was declared in the corresponding header file.
+ */
+
+#include "negative_int.h"
+
+int Negative_int::count_total=0;
+int Negative_int::count_negative=0;
+
+void Negative_int::input_data()
+{
+	int integer;
+
+	cout << "Enter a list of n integers. Enter -999 to stop input." << endl;
+	for (int i=0; i < MAX; i++)
+	{
+		cin >> integer;
+
+		if(integer != DELIM)
+		{
+			integer_list[i] = integer;
+			count_total++;
+		}
+		else
+			break;
+	}
+}
+
+int Negative_int::find_negative()
+{
+	for (int i=0; i < count_total; i++)
+	{
+		if (integer_list[i] < 0)
+			count_negative++;
+	}
+
+	return(count_negative);
+
+}
+
+void Negative_int::output_data()
+{
+	cout << "The total number of negative integers is: " << find_negative() << endl;
+}
+
+int main()
+{
+	Negative_int x;
+
+	x.input_data();
+	x.output_data();
+}
+]0;abatista@storm:~[abatista@storm ~]$ g++ negative_int.cpp
+]0;abatista@storm:~[abatista@storm ~]$ ./a.out
+Enter a list of n integers. Enter -999 to stop input.
+1
+2
+8
+43
+-5
+-1
+4
+-56
+78
+-99  8 22
+-999
+The total number of negative integers is: 4
+]0;abatista@storm:~[abatista@storm ~]$ exo[Kit
+exit
+
+Script done on 2017-09-22 19:13:05-0400

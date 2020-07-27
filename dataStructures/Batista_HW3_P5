@@ -1,0 +1,87 @@
+Script started on 2017-09-26 23:00:36-0400
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ cat evenfactor.h evenfactor.cpp
+/* Adrianna Batista
+ * 9/26/2017
+ * Assignment: Homework 3
+ * Problem 5
+ * File Name: evenfactor.h
+ * File Description: This is the header file for the Evenfactor class
+ */
+
+#ifndef EVENFACTOR_H
+#define EVENFACTOR_H
+
+#include <iostream>
+using namespace std;
+
+class Evenfactor
+{
+	public:
+		void input_data(); //reads user input
+		int calc_factor(); //caculates factorization
+		void output_data(); //outputs data to user
+
+	private:
+		int n, m; //n is user input, m is smallest factor of n
+		static int k; //acting as counter variable
+
+};
+#endif
+/* Adrianna Batista
+ * 9/26/2017
+ * Assignment: Homework 3
+ * Problem 5
+ * File Name: evenfactor.cpp
+ * File Description: This is the implementation file for the Evenfactor class. A main driver file is included at the end 
+ */
+
+#include "evenfactor.h"
+
+int Evenfactor::k=0;
+
+void Evenfactor::input_data()
+{
+	cout << "Enter an even integer to find its factorization: ";
+	cin >> n;
+}
+
+int Evenfactor::calc_factor()
+{
+	m=n;
+
+	while (m%2==0)
+	{
+		m /= 2;
+		k++;
+	}
+
+	return (m);
+}
+
+void Evenfactor::output_data()
+{
+	cout << n << " = " << m << " x 2^" << k << endl;
+
+}
+
+int main()
+{
+	Evenfactor x;
+
+	x.input_data();
+	x.calc_factor();
+	x.output_data();
+
+}
+
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ g++ evenfactor.cpp
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ ./a.out
+Enter an even integer to find its factorization: 48
+48 = 3 x 2^4
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ ./a.out
+Enter an even integer to find its factorization: 52
+52 = 13 x 2^2
+]0;abatista@storm:~/cisc2200/Homework[abatista@storm Homework]$ exit
+exit
+
+Script done on 2017-09-26 23:01:05-0400

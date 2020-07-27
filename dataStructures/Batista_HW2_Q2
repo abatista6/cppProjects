@@ -1,0 +1,122 @@
+Script started on 2017-09-22 20:08:41-0400
+]0;abatista@storm:~[abatista@storm ~]$ cat recurring_int.h recurring_int.h[Kcpp
+/*Adrianna Batista
+ * Assignment: HW #2
+ * Problem 2: Write a c++ program that produces the list of all values that are recurring.
+ * File Name: recurring_int.h
+ * File Description: This is the header file that declares the data for the class Recurring_int.
+ */
+
+#ifndef RECURRING_INT_H
+#define RECURRING_INT_H
+
+#include <iostream>
+using namespace std;
+
+class Recurring_int
+{
+	public:
+		void input_data(); //function that reads user input
+		int find_recurring(); //function that finds the recurring values
+		void output_data(int); //function that writes program output
+
+	private:
+		static const int MAX = 100; //set array size to 100 since user is inputting n numbers of integers
+		int recurring_list[MAX]; //array that holds user input
+		static const int DELIM = -999; //delimeter to signal end of user input
+		static int count; //counter to keep track of number of elements entered into array
+
+};
+#endif
+/*Adrianna Batista
+ * Assignment: HW #2
+ * Problem 2: Write a c++ program that produces the list of all values that are recurring.
+ * File Name: recurring_int.cpp
+ * File Description: The following code defines and implements the Recurring_int class data
+ * that was declared in the corresponding header file.
+ */
+
+#include "recurring_int.h"
+
+int Recurring_int::count=0;
+
+void Recurring_int::input_data()
+{
+	int input;
+
+	cout << "Enter a list of n integers. Enter -999 to stop input" << endl;
+	for (int i=0; i < MAX; i++)
+	{
+		cin >> input;
+
+		if(input != DELIM)
+		{
+			recurring_list[i] = input;
+			count++;
+		}
+		else
+			break;
+	}
+}
+
+int Recurring_int::find_recurring()
+{
+	for (int i=0; i < count; i++)
+	{
+		int a = recurring_list[i];
+
+		for (int j = i+1; j <= count; j++)
+		{
+			int b = recurring_list[j];
+
+			if (a == b)
+			{
+				output_data(a);
+			}
+
+			else if (a < b) //because of nondecreasing order, the for loop can be terminated
+			{
+				j = count+1;
+			}
+		}
+	}
+}
+
+void Recurring_int::output_data(int a)
+{
+	cout << a << endl;
+}
+
+int main()
+{
+	Recurring_int x;
+
+	x.input_data();
+	cout << "The recurring values are: " << endl;
+	x.find_recurring();
+}
+]0;abatista@storm:~[abatista@storm ~]$ g++ recurring_int.cpp
+]0;abatista@storm:~[abatista@storm ~]$ ./a.out
+Enter a list of n integers. Enter -999 to stop input
+1
+1
+2
+5
+6
+9
+13
+13
+18
+24
+29
+3 3 45
+45
+-999
+The recurring values are: 
+1
+13
+45
+]0;abatista@storm:~[abatista@storm ~]$ exit
+exit
+
+Script done on 2017-09-22 20:09:42-0400
